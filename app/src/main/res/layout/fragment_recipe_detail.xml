@@ -2,36 +2,37 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable name="recipe"
-            type="com.recipebook.recipebook.db.Recipe"/>
-        <variable name="callback"
-            type="com.recipebook.recipebook.ui.RecipeCallBack"/>
-    </data>
-
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"
-        android:onClick="@{() ->  callback.onClick(recipe)}"
-        app:cardUseCompatPadding="true">
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/viewRecipeImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            />
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/recipeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{recipe.recipeTitle}"/>
-
-            <TextView
+                android:id="@+id/viewRecipeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/recipeTitle"
-                android:text="@{recipe.category}"/>
-        </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+                />
+
+            <TextView
+                android:id="@+id/viewCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
 </layout>

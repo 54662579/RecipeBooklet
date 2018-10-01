@@ -11,10 +11,13 @@ public class RecipeViewModel extends AndroidViewModel {
 
     private RecipeRepository recipeRepository;
     private LiveData<List<Recipe>> recipeList;
+    private int mRecipeId;
 
 
-    public RecipeViewModel(@NonNull Application application) {
+    public RecipeViewModel(@NonNull Application application, RecipeRepository recipeRepository,
+                           int recipeId) {
         super(application);
+        mRecipeId = recipeId;
         recipeRepository = new RecipeRepository(application);
         recipeList = recipeRepository.getRecipeList();
     }
@@ -26,13 +29,15 @@ public class RecipeViewModel extends AndroidViewModel {
         return recipeList;
     }
 
-
-
     public LiveData<List<Recipe>> getRecipeByCategory(String category){
         return recipeRepository.getRecipeByCategory(category);
     }
 
     public void insertRecipe(Recipe recipe){
         recipeRepository.insertRecipe(recipe);
+    }
+
+    public Recipe getRecipeById(int recipeId){
+        return recipeRepository.getRecipeById(recipeId);
     }
 }

@@ -10,6 +10,7 @@ public class RecipeRepository {
 
     private RecipeDAO rRecipeDAO;
     private LiveData<List<Recipe>> recipeList;
+    private int recipeId;
 
 
     public RecipeRepository(Application application) {
@@ -35,7 +36,9 @@ public class RecipeRepository {
         return rRecipeDAO.getRecipeByCategory(category);
     }
 
-
+    public Recipe getRecipeById(int recipeId){
+        return rRecipeDAO.getRecipeById(recipeId);
+    }
 
     private static class insertAsyncTask extends AsyncTask<Recipe, Void, Void> {
 

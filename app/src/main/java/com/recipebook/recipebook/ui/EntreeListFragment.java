@@ -4,6 +4,7 @@ package com.recipebook.recipebook.ui;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.recipebook.recipebook.MainActivity;
 import com.recipebook.recipebook.R;
@@ -19,6 +21,7 @@ import com.recipebook.recipebook.db.Recipe;
 import com.recipebook.recipebook.db.RecipeViewModel;
 
 import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +65,10 @@ public class EntreeListFragment extends android.support.v4.app.Fragment {
             public void onChanged(@Nullable List<Recipe> recipeList) {
                 if (recipeList != null) {
                     rAdapter.setRecipeList(recipeList);
-                }
+                } else {
+                    Toast.makeText(getActivity(), "No recipe, add new", Toast.LENGTH_LONG)
+                        .show();
+                    }
             }
         });
     }

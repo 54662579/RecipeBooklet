@@ -5,6 +5,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 @Database(entities = {Recipe.class},  version = 1, exportSchema = false)
@@ -37,7 +38,28 @@ public abstract class RecipeRoomDatabase extends RoomDatabase {
             super.onOpen(db);
             // If you want to keep the data through app restarts,
             // comment out the following line.
-            //new PopulateDbAsync(INSTANCE).execute();
+            new PopulateDbAsync(INSTANCE).execute();
         }
     };
+
+    /**
+     * Populate the database in the background.
+     * If you want to start with more words, just add them.
+     */
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+
+        private final RecipeDAO rDao;
+
+        PopulateDbAsync(RecipeRoomDatabase db) {
+            rDao = db.recipeDAO();
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            // Start the app with a clean database every time.
+            // Not needed if you only populate on creation.
+            rDao.deleteAllRecipes();
+            return null;
+        }
+    }
 }

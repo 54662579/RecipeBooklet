@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layout1"
         android:layout_width="160dp"
