@@ -16,10 +16,16 @@
         android:onClick="@{() ->  callback.onClick(recipe)}"
         app:cardUseCompatPadding="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/testRecipeId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(recipe.id)}"/>
             <TextView
                 android:id="@+id/recipeTitle"
                 android:layout_width="wrap_content"
@@ -29,9 +35,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/recipeTitle"
                 android:text="@{recipe.category}"/>
-        </RelativeLayout>
+
+            <TextView
+                android:id="@+id/imagePathTest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{recipe.imagePath}"/>
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 </layout>
