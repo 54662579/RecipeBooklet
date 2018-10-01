@@ -14,10 +14,8 @@ public class RecipeViewModel extends AndroidViewModel {
     private int mRecipeId;
 
 
-    public RecipeViewModel(@NonNull Application application, RecipeRepository recipeRepository,
-                           int recipeId) {
+    public RecipeViewModel(@NonNull Application application) {
         super(application);
-        mRecipeId = recipeId;
         recipeRepository = new RecipeRepository(application);
         recipeList = recipeRepository.getRecipeList();
     }

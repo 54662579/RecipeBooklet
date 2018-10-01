@@ -1,6 +1,7 @@
 package com.recipebook.recipebook.ui;
 
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentResolver;
 import android.databinding.DataBindingUtil;
@@ -32,7 +33,7 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
 
     private static final String KEY_RECIPE_ID = "recipe_id";
     //private FragmentRecipeDetailBinding binding;
-    private RecipeViewModel recipeViewModel;
+
     private ImageView viewImage;
     private TextView viewTitle;
 
@@ -61,19 +62,18 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        RecipeViewModel recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
         Recipe r = recipeViewModel.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
-        /*final RecipeViewModel recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel
-                .class); */
-        String fileName = r.getImagePath()+".jpg";
+
+       /* String fileName = r.getImagePath();
         try {
             //FileInputStream imageOutput = getContext().openFileInput(fileName);
             viewImage.setImageBitmap(BitmapFactory.decodeStream(getContext().openFileInput(fileName)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }  */
         viewTitle.setText(r.getRecipeTitle());
 
-       // binding.setRecipeViewModel(recipeViewModel);
     }
 
     public static RecipeDetailFragment forRecipe(int recipeId){

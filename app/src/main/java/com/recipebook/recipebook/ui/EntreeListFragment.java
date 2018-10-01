@@ -28,9 +28,6 @@ import java.util.List;
  */
 public class EntreeListFragment extends android.support.v4.app.Fragment {
 
-    //private RecipeViewModel recipeViewModel;
-    public static final String TAG = "RecipeListViewModel";
-
     private RecipeAdapter rAdapter;
 
     private ItemRecyclerViewBinding binding;

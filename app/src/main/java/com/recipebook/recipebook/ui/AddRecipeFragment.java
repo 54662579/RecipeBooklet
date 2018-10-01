@@ -213,7 +213,7 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
 
         Bitmap bm=null;
         if (data != null) {
- /*           try {
+        try {
                 ContentResolver contentResolver =  getContext().getContentResolver();
                 bm = MediaStore.Images.Media.getBitmap(contentResolver, data.getData());
                 byte[] buffer = new byte[8 * 1024];
@@ -227,7 +227,7 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
                 inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
         }
         rImage.setImageBitmap(bm);
         this.recipeImagePath = fileName;
