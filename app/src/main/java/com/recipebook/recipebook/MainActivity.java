@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public void showDetail(Recipe recipe){
         RecipeDetailFragment recipeFragment = RecipeDetailFragment.forRecipe(recipe.getId());
         MainActivity.fragmentManager.beginTransaction().replace(R.id
-                .fragment_container, new RecipeDetailFragment()).addToBackStack(null).commit();
+                .fragment_container, recipeFragment).addToBackStack("recipe").commit();
 
 
     }

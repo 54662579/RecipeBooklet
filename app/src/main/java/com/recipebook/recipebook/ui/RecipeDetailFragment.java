@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentResolver;
 import android.databinding.DataBindingUtil;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -18,13 +19,16 @@ import android.widget.TextView;
 import com.recipebook.recipebook.R;
 import com.recipebook.recipebook.databinding.FragmentRecipeDetailBinding;
 import com.recipebook.recipebook.db.Recipe;
+import com.recipebook.recipebook.db.RecipeRepository;
 import com.recipebook.recipebook.db.RecipeViewModel;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,17 +66,23 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        RecipeViewModel recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
-        Recipe r = recipeViewModel.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
+
+        RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
+        Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
 
 
-       /* String fileName = r.getImagePath();
+       String fileName = r.getImagePath();
         try {
-            //FileInputStream imageOutput = getContext().openFileInput(fileName);
-            viewImage.setImageBitmap(BitmapFactory.decodeStream(getContext().openFileInput(fileName)));
+           FileInputStream imageInput = getContext().openFileInput(fileName);
+           imageInput.close();
+           viewImage.setImageBitmap(BitmapFactory.decodeStream(getContext().openFileInput
+                    (fileName)));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }  */
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         viewTitle.setText(r.getRecipeTitle());
 
     }

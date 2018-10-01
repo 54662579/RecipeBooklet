@@ -19,9 +19,6 @@ public class RecipeRepository {
         recipeList = rRecipeDAO.getAllRecipes();
     }
 
-    public RecipeRepository() {
-
-    }
 
     public void insertRecipe (Recipe recipe) {
         new insertAsyncTask(rRecipeDAO).execute(recipe);

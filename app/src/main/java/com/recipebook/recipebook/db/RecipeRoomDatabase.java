@@ -25,7 +25,8 @@ public abstract class RecipeRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null){
                     //Create database here
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            RecipeRoomDatabase.class, "recipe_Database").addCallback(rRoomDatabaseCallBack).build();
+                            RecipeRoomDatabase.class, "recipe_Database").allowMainThreadQueries()
+                            .addCallback(rRoomDatabaseCallBack).build();
                 }
             }
         }
