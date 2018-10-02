@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,10 +37,16 @@ import java.io.IOException;
 public class RecipeDetailFragment extends android.support.v4.app.Fragment {
 
     private static final String KEY_RECIPE_ID = "recipe_id";
-    //private FragmentRecipeDetailBinding binding;
-
     private ImageView viewImage;
     private TextView viewTitle;
+    private TextView viewCategory;
+    private TextView viewServing;
+    private TextView viewPrepTime;
+    private TextView viewCookTime;
+    private TextView viewIngredient;
+    private TextView viewInstruction;
+    private ImageButton deleteButton;
+    private ImageButton editButton;
 
 
 
@@ -53,13 +60,17 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-       /*binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe_detail, container,
-                false);*/
-
         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
         viewImage = view.findViewById(R.id.viewRecipeImage);
         viewTitle = view.findViewById(R.id.viewRecipeTitle);
+        viewCategory = view.findViewById(R.id.viewCategory);
+        viewServing = view.findViewById(R.id.viewServing);
+        viewPrepTime = view.findViewById(R.id.viewPreptime);
+        viewCookTime = view.findViewById(R.id.viewCookTime);
+        viewIngredient = view.findViewById(R.id.viewIngredient);
+        viewInstruction = view.findViewById(R.id.viewInstruction);
+        deleteButton = view.findViewById(R.id.deleteButton);
+        editButton = view.findViewById(R.id.editButton);
         return view;
     }
 
@@ -71,7 +82,7 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
         Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
 
 
-       String fileName = r.getImagePath();
+        String fileName = r.getImagePath();
         try {
            FileInputStream imageInput = getContext().openFileInput(fileName);
            imageInput.close();
@@ -84,6 +95,12 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
             e.printStackTrace();
         }
         viewTitle.setText(r.getRecipeTitle());
+        viewCategory.setText(r.getCategory());
+        viewServing.setText(r.getServing());
+        viewPrepTime.setText(r.getServing());
+        viewCookTime.setText(r.getCookingTime());
+        viewIngredient.setText(r.getIngredients());
+        viewInstruction.setText(r.getInstructions());
 
     }
 
@@ -93,7 +110,6 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
         args.putInt(KEY_RECIPE_ID, recipeId);
         fragment.setArguments(args);
         return fragment;
-
     }
 
 }

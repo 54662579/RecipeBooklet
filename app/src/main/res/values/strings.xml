@@ -20,5 +20,13 @@
     <string name="category5">Drinks</string>
     <string name="cd_recipe_list">Recipe list</string>
 
+    <string name="titleheader">Recipe Title</string>
+    <string name="categoryheader">Recipe Category</string>
+    <string name="servingheader">Serving Size</string>
+    <string name="preptimeheader">Prep Time</string>
+    <string name="cooktimeheader">Cooking Time</string>
+    <string name="ingredientheader">Ingredients</string>
+    <string name="instructionheader">Instructions</string>
+
 
 </resources>
