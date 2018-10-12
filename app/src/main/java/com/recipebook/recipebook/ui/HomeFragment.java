@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.recipebook.recipebook.MainActivity;
 import com.recipebook.recipebook.R;
-import com.recipebook.recipebook.db.Recipe;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +42,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         mainCourseLayout = view.findViewById(R.id.layout3);
         dessertLayout = view.findViewById(R.id.layout4);
         condimentLayout = view.findViewById(R.id.layout5);
-        drinkLayout = view.findViewById(R.id.linearLayout6);
+        drinkLayout = view.findViewById(R.id.layout6);
 
         addLayout.setOnClickListener(this);
         addButton.setOnClickListener(this);
@@ -57,6 +56,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
 
     @Override
     public void onClick(View v) {
+        RecipeListFragment listFragment;
         switch (v.getId()){
             case R.id.floatingAddButton:
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
@@ -67,12 +67,31 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
                         new AddRecipeFragment()).addToBackStack(null).commit();
                 break;
             case R.id.layout2:
+                listFragment = RecipeListFragment.sendCategory("Entree");
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                        new EntreeListFragment()).addToBackStack(null).commit();
+                       listFragment).addToBackStack(null).commit();
                 break;
-
+            case R.id.layout3:
+                listFragment = RecipeListFragment.sendCategory("Main Course");
+                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        listFragment).addToBackStack(null).commit();
+                break;
+            case R.id.layout4:
+                listFragment = RecipeListFragment.sendCategory("Dessert");
+                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        listFragment).addToBackStack(null).commit();
+                break;
+            case R.id.layout5:
+                listFragment = RecipeListFragment.sendCategory("Condiment");
+                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        listFragment).addToBackStack(null).commit();
+                break;
+            case R.id.layout6:
+                listFragment = RecipeListFragment.sendCategory("Drinks");
+                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        listFragment).addToBackStack(null).commit();
+                break;
         }
     }
-
 
 }

@@ -4,6 +4,7 @@ package com.recipebook.recipebook.ui;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -37,6 +38,7 @@ import java.io.IOException;
 public class RecipeDetailFragment extends android.support.v4.app.Fragment {
 
     private static final String KEY_RECIPE_ID = "recipe_id";
+
     private ImageView viewImage;
     private TextView viewTitle;
     private TextView viewCategory;
@@ -101,7 +103,14 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
         viewCookTime.setText(r.getCookingTime());
         viewIngredient.setText(r.getIngredients());
         viewInstruction.setText(r.getInstructions());
-
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DeleteFragment.class);
+                intent.putExtra("recipe_id", r.getId());
+                startActivity(intent);
+            }
+        });
     }
 
     public static RecipeDetailFragment forRecipe(int recipeId){

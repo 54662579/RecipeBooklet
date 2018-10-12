@@ -169,7 +169,7 @@
         android:background="@drawable/custom_border_layout"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toStartOf="@+id/layout6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout3">
 
@@ -197,7 +197,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/layout6"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginBottom="16dp"

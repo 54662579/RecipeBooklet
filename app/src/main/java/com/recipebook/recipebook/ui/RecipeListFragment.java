@@ -4,7 +4,6 @@ package com.recipebook.recipebook.ui;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -26,13 +25,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntreeListFragment extends android.support.v4.app.Fragment {
+public class RecipeListFragment extends android.support.v4.app.Fragment {
 
     private RecipeAdapter rAdapter;
 
     private ItemRecyclerViewBinding binding;
 
-    public EntreeListFragment(){
+    public RecipeListFragment(){
 
     }
 
@@ -57,7 +56,9 @@ public class EntreeListFragment extends android.support.v4.app.Fragment {
     }
 
     private void subscribeUi(RecipeViewModel viewModel){
-        viewModel.getRecipeByCategory("Entree").observe(this, new Observer<List<Recipe>>() {
+        viewModel.getRecipeByCategory(getArguments().getString("keyCategory")).observe(this, new
+                Observer<List<Recipe>>
+                () {
             @Override
             public void onChanged(@Nullable List<Recipe> recipeList) {
                 if (recipeList != null) {
@@ -77,8 +78,15 @@ public class EntreeListFragment extends android.support.v4.app.Fragment {
             if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)){
                 ((MainActivity)getActivity()).showDetail(recipe);
             }
-
         }
     };
+
+    public static RecipeListFragment sendCategory(String category){
+        RecipeListFragment fragment = new RecipeListFragment();
+        Bundle args = new Bundle();
+        args.putString("keyCategory", category);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
 }
