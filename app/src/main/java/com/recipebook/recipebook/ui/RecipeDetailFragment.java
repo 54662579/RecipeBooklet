@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.recipebook.recipebook.MainActivity;
 import com.recipebook.recipebook.R;
 import com.recipebook.recipebook.databinding.FragmentRecipeDetailBinding;
 import com.recipebook.recipebook.db.Recipe;
@@ -84,33 +85,39 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
         Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
 
 
-        String fileName = r.getImagePath();
         try {
+            String fileName = r.getImagePath();
            FileInputStream imageInput = getContext().openFileInput(fileName);
            imageInput.close();
            viewImage.setImageBitmap(BitmapFactory.decodeStream(getContext().openFileInput
                     (fileName)));
 
+           viewTitle.setText(r.getRecipeTitle());
+            viewCategory.setText(r.getCategory());
+            viewServing.setText(r.getServing());
+            viewPrepTime.setText(r.getServing());
+            viewCookTime.setText(r.getCookingTime());
+            viewIngredient.setText(r.getIngredients());
+            viewInstruction.setText(r.getInstructions());
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+             /*   Intent intent = new Intent(getActivity(), DeleteFragment.class);
+                intent.putExtra("recipe_id", r.getId());
+                startActivity(intent);*/
+                    DeleteFragment fragment = DeleteFragment.forRecipe(r.getId());
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                            fragment).addToBackStack(null).commit();
+                }
+            });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            e.printStackTrace();
         }
-        viewTitle.setText(r.getRecipeTitle());
-        viewCategory.setText(r.getCategory());
-        viewServing.setText(r.getServing());
-        viewPrepTime.setText(r.getServing());
-        viewCookTime.setText(r.getCookingTime());
-        viewIngredient.setText(r.getIngredients());
-        viewInstruction.setText(r.getInstructions());
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DeleteFragment.class);
-                intent.putExtra("recipe_id", r.getId());
-                startActivity(intent);
-            }
-        });
+
     }
 
     public static RecipeDetailFragment forRecipe(int recipeId){

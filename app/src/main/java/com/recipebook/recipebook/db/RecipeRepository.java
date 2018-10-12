@@ -24,6 +24,10 @@ public class RecipeRepository {
         new insertAsyncTask(rRecipeDAO).execute(recipe);
     }
 
+    public void deleteRecipe (Recipe recipe){
+        rRecipeDAO.deleteRecipe(recipe);
+    }
+
     public LiveData<List<Recipe>> getRecipeList() {
         return recipeList;
         }
