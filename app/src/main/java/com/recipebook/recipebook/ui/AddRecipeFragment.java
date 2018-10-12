@@ -73,7 +73,7 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
         rImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImage();
+                selectImage(v);
             }
         });
 
@@ -132,7 +132,7 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
         }
     }
 
-    private void selectImage() {
+    public void selectImage(View view) {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
 
@@ -192,7 +192,7 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
         String fileName = System.currentTimeMillis() + ".jpg";
 

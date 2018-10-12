@@ -54,28 +54,35 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
         super.onActivityCreated(savedInstanceState);
         RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
         Recipe deleteRecipe = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
+
+        if (deleteRecipe == null){
+            MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new
+                    HomeFragment()).addToBackStack(null).commit();
+            return;
+        }
+
         recipeTitle.setText(deleteRecipe.getRecipeTitle());
+        String recipeCategory = deleteRecipe.getCategory();
+        RecipeListFragment newFragment = RecipeListFragment.sendCategory(recipeCategory);
 
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String recipeCategory = deleteRecipe.getCategory();
-                RecipeListFragment newFragment = RecipeListFragment.sendCategory(recipeCategory);
-
                 //delete recipe
                 repository.deleteRecipe(deleteRecipe);
                 //go back to the list
-
-                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new
-                        HomeFragment()).addToBackStack(null).commit();
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
                         newFragment).addToBackStack(null).commit();
-
             }
         });
 
-
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        newFragment).addToBackStack(null).commit();
+            }
+        });
 
     }
 
