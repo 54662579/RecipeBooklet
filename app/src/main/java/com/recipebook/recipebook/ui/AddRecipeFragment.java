@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.recipebook.recipebook.MainActivity;
 import com.recipebook.recipebook.R;
 import com.recipebook.recipebook.db.Recipe;
 import com.recipebook.recipebook.db.RecipeViewModel;
@@ -107,8 +108,8 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
                 recipeViewModel.insertRecipe(r);
                 Toast.makeText(getActivity(), "Recipe added successfully", Toast.LENGTH_LONG).show();
 
-                title = ""; category = "" ; serving = "" ; prepTime = "" ;
-                cookingTime  = "" ; ingredient = "" ; instruction = "" ;
+                MainActivity.fragmentManager.popBackStack();
+                MainActivity.fragmentManager.getPrimaryNavigationFragment();
             }
         });
         return view;
@@ -124,7 +125,8 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
                     else if(userChoosenTask.equals("Choose from Library"))
                         galleryIntent();
                 } else {
-                    //code for deny
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                            new HomeFragment()).addToBackStack(null).commit();
                 }
                 break;
         }

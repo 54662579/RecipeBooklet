@@ -4,6 +4,7 @@ package com.recipebook.recipebook.ui;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,15 +66,20 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
                 //delete recipe
                 repository.deleteRecipe(deleteRecipe);
                 //go back to the list
-                MainActivity.fragmentManager.popBackStack();
+
+                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new
+                        HomeFragment()).addToBackStack(null).commit();
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
                         newFragment).addToBackStack(null).commit();
+
             }
         });
 
 
 
     }
+
+
 
     public static DeleteFragment forRecipe(int recipeId) {
         DeleteFragment fragment = new DeleteFragment();

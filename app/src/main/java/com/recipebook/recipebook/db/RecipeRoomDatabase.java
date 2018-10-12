@@ -45,7 +45,6 @@ public abstract class RecipeRoomDatabase extends RoomDatabase {
 
     /**
      * Populate the database in the background.
-     * If you want to start with more words, just add them.
      */
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
