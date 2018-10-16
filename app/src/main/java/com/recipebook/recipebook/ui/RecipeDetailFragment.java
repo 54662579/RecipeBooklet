@@ -114,6 +114,15 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               EditRecipeFragment fragment = EditRecipeFragment.forRecipe(r.getId());
+               MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        fragment).addToBackStack(null).commit();
+            }
+        });
+
     }
 
     public static RecipeDetailFragment forRecipe(int recipeId){

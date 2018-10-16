@@ -61,7 +61,7 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
             return;
         }
 
-        recipeTitle.setText(deleteRecipe.getRecipeTitle());
+        recipeTitle.setText(deleteRecipe.getRecipeTitle()+"?");
         String recipeCategory = deleteRecipe.getCategory();
         RecipeListFragment newFragment = RecipeListFragment.sendCategory(recipeCategory);
 

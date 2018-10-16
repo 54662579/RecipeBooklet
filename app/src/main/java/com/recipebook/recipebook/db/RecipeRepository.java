@@ -28,6 +28,8 @@ public class RecipeRepository {
         rRecipeDAO.deleteRecipe(recipe);
     }
 
+    public void updateRecipe(Recipe recipe){rRecipeDAO.updateRecipe(recipe);}
+
     public LiveData<List<Recipe>> getRecipeList() {
         return recipeList;
         }
