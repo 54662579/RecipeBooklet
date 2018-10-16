@@ -36,6 +36,7 @@
                 android:layout_alignBottom="@id/recipeImage"
                 android:background="@color/colorAccent"
                 android:paddingLeft="10dp"
+                android:textSize="14dp"
                 android:text="@{recipe.recipeTitle}"
                 android:textColor="@android:color/background_light" />
 

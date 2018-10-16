@@ -102,7 +102,7 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
         viewTitle.setText(r.getRecipeTitle());
         viewCategory.setText(r.getCategory());
         viewServing.setText(r.getServing());
-        viewPrepTime.setText(r.getServing());
+        viewPrepTime.setText(r.getPrepTime());
         viewCookTime.setText(r.getCookingTime());
         viewIngredient.setText(r.getIngredients());
         viewInstruction.setText(r.getInstructions());

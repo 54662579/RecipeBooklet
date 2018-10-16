@@ -114,7 +114,7 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 selectImage(v);
-                //delete oldfile from the system
+                //delete old file from the system
                 getContext().deleteFile(r.getImagePath());
             }
         });
@@ -143,6 +143,9 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
                 Toast.makeText(getActivity(), "Recipe edited successfully", Toast.LENGTH_LONG)
                         .show();
 
+                RecipeDetailFragment recipeFragment = RecipeDetailFragment.forRecipe(r.getId());
+                MainActivity.fragmentManager.beginTransaction().replace(R.id
+                        .fragment_container, recipeFragment).addToBackStack(null).commit();
 
             }
         });
