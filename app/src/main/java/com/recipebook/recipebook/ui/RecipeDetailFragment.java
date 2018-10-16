@@ -83,6 +83,7 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
 
         RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
         Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
+
         try {
             String fileName = r.getImagePath();
            FileInputStream imageInput = getContext().openFileInput(fileName);

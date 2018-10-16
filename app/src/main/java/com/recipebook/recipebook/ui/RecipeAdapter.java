@@ -1,21 +1,36 @@
 package com.recipebook.recipebook.ui;
 
+import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.recipebook.recipebook.R;
 import com.recipebook.recipebook.databinding.FragmentRecipeListBinding;
 import com.recipebook.recipebook.db.Recipe;
+import com.recipebook.recipebook.db.RecipeViewModel;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>{
 
     private List<Recipe> rRecipeList;
+    private Context context;
 
 
     @Nullable
@@ -60,7 +75,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
                             && newRecipe.getPrepTime() == oldRecipe.getPrepTime()
                             && newRecipe.getCookingTime() == oldRecipe.getCookingTime()
                             && newRecipe.getIngredients() == oldRecipe.getIngredients()
-                            && newRecipe.getInstructions() == oldRecipe.getInstructions();
+                            && newRecipe.getInstructions() == oldRecipe.getInstructions()
+                            && newRecipe.getImagePath() == oldRecipe.getImagePath();
                 }
             });
             rRecipeList = recipeList;
@@ -74,17 +90,32 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         FragmentRecipeListBinding binding = DataBindingUtil
              .inflate(LayoutInflater.from(parent.getContext()), R.layout.fragment_recipe_list,
-                     parent, false);;
+                     parent, false);
+        context = parent.getContext();
         binding.setCallback(rRecipeCallBack);
         return new RecipeViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(RecipeViewHolder recipeViewHolder, int i) {
-            Recipe current = rRecipeList.get(i);
-            recipeViewHolder.rBinding.setRecipe(current);
-            recipeViewHolder.rBinding.executePendingBindings();
+        Recipe current = rRecipeList.get(i);
+        String fileName = current.getImagePath();
+        try {
+            FileInputStream imagePath = context.openFileInput(fileName);
+            imagePath.close();
+            recipeViewHolder.rBinding.recipeImage.setImageBitmap(BitmapFactory.decodeStream(context
+                    .openFileInput(fileName)));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        recipeViewHolder.rBinding.setRecipe(current);
+        recipeViewHolder.rBinding.executePendingBindings();
     }
+
 
     @Override
     public int getItemCount() {
@@ -95,7 +126,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
 
     public class RecipeViewHolder extends RecyclerView.ViewHolder{
-
 
       final FragmentRecipeListBinding rBinding;
 
