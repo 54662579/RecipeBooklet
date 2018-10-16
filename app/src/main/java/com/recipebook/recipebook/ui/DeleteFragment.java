@@ -30,13 +30,6 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
-/*    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(KEY_RECIPE_ID);
-        }
-    }  */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +63,10 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 //delete recipe
                 repository.deleteRecipe(deleteRecipe);
+
+                //delete file from the system.
+                getContext().deleteFile(deleteRecipe.getImagePath());
+
                 //go back to the list
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
                         newFragment).addToBackStack(null).commit();
