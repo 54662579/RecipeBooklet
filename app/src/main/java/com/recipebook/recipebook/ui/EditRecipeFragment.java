@@ -143,10 +143,8 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
                 Toast.makeText(getActivity(), "Recipe edited successfully", Toast.LENGTH_LONG)
                         .show();
 
-                RecipeDetailFragment recipeFragment = RecipeDetailFragment.forRecipe(r.getId());
-                MainActivity.fragmentManager.beginTransaction().replace(R.id
-                        .fragment_container, recipeFragment).addToBackStack(null).commit();
-
+                //getting back to detailfragment
+                getFragmentManager().popBackStackImmediate();
             }
         });
     }
@@ -232,9 +230,9 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
         String fileName = System.currentTimeMillis() + ".jpg";
 
         try {
-            FileOutputStream fo = getContext().openFileOutput(fileName, 0);
-            fo.write(bytes.toByteArray());
-            fo.close();
+            FileOutputStream fileOutput = getContext().openFileOutput(fileName, 0);
+            fileOutput.write(bytes.toByteArray());
+            fileOutput.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

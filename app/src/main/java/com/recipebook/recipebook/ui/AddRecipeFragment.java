@@ -195,9 +195,9 @@ public class AddRecipeFragment extends android.support.v4.app.Fragment {
         String fileName = System.currentTimeMillis() + ".jpg";
 
         try {
-            FileOutputStream fo = getContext().openFileOutput(fileName, 0);
-            fo.write(bytes.toByteArray());
-            fo.close();
+            FileOutputStream fileOutput = getContext().openFileOutput(fileName, 0);
+            fileOutput.write(bytes.toByteArray());
+            fileOutput.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
