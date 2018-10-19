@@ -11,7 +11,6 @@ public class RecipeViewModel extends AndroidViewModel {
 
     private RecipeRepository recipeRepository;
     private LiveData<List<Recipe>> recipeList;
-    private int mRecipeId;
 
 
     public RecipeViewModel(@NonNull Application application) {

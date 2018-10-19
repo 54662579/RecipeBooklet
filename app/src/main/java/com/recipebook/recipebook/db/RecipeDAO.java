@@ -35,4 +35,5 @@ public interface RecipeDAO {
 
     @Query("SELECT * FROM RECIPES where category LIKE :cValue")
     LiveData<List<Recipe>> getRecipeByCategory(String cValue);
+
 }

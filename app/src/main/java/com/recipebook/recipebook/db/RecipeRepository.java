@@ -10,7 +10,7 @@ public class RecipeRepository {
 
     private RecipeDAO rRecipeDAO;
     private LiveData<List<Recipe>> recipeList;
-    private int recipeId;
+
 
 
     public RecipeRepository(Application application) {
@@ -57,5 +57,7 @@ public class RecipeRepository {
             return null;
         }
     }
+
+
 
 }

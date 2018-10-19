@@ -50,6 +50,7 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
     private TextView viewInstruction;
     private ImageButton deleteButton;
     private ImageButton editButton;
+    private RecipeViewModel recipeViewModel;
 
 
 
@@ -81,8 +82,10 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
-        Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
+        recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
+        Recipe r = recipeViewModel.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
+      //  RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
+     //   Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
 
         try {
             String fileName = r.getImagePath();

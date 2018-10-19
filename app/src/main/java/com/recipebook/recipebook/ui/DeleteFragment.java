@@ -1,6 +1,7 @@
 package com.recipebook.recipebook.ui;
 
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.recipebook.recipebook.MainActivity;
 import com.recipebook.recipebook.R;
 import com.recipebook.recipebook.db.Recipe;
 import com.recipebook.recipebook.db.RecipeRepository;
+import com.recipebook.recipebook.db.RecipeViewModel;
 
 
 public class DeleteFragment extends android.support.v4.app.Fragment {
@@ -24,7 +26,7 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
     private Button yesButton;
     private Button noButton;
 
-
+    private RecipeViewModel recipeViewModel;
 
     public DeleteFragment() {
         // Required empty public constructor
@@ -45,8 +47,10 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
-        Recipe deleteRecipe = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
+        recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
+        Recipe deleteRecipe = recipeViewModel.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
+       // RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
+      //  Recipe deleteRecipe = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
 
         if (deleteRecipe == null){
             MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new
@@ -62,7 +66,8 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 //delete recipe
-                repository.deleteRecipe(deleteRecipe);
+                recipeViewModel.deleteRecipe(deleteRecipe);
+             //   repository.deleteRecipe(deleteRecipe);
 
                 //delete file from the system.
                 getContext().deleteFile(deleteRecipe.getImagePath());
