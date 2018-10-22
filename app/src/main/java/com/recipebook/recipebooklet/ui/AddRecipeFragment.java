@@ -1,4 +1,4 @@
-package com.recipebook.recipebook.ui;
+package com.recipebook.recipebooklet.ui;
 
 
 import android.app.Activity;
@@ -9,29 +9,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.recipebook.recipebook.MainActivity;
-import com.recipebook.recipebook.R;
-import com.recipebook.recipebook.db.Recipe;
-import com.recipebook.recipebook.db.RecipeRepository;
-import com.recipebook.recipebook.db.RecipeViewModel;
+import com.recipebook.recipebooklet.MainActivity;
+import com.recipebook.recipebooklet.R;
+import com.recipebook.recipebooklet.db.Recipe;
+import com.recipebook.recipebooklet.db.RecipeViewModel;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,9 +35,7 @@ import java.io.InputStream;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EditRecipeFragment extends android.support.v4.app.Fragment {
-
-    private static final String KEY_RECIPE_ID = "recipe_id";
+public class AddRecipeFragment extends android.support.v4.app.Fragment {
 
     private EditText rTitle, rServing, rPrepTime, rCookingTime, rIngredients,
             rInstrucitons;
@@ -53,9 +46,9 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
     private Button saveButton;
     private RecipeViewModel recipeViewModel;
     private String recipeImagePath;
-    private ImageButton editButton;
 
-    public EditRecipeFragment() {
+
+    public AddRecipeFragment() {
         // Required empty public constructor
     }
 
@@ -64,7 +57,8 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_recipe, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_recipe, container, false);
+
         rTitle = view.findViewById(R.id.editRecipeTitle);
         rCategory = view.findViewById(R.id.recipeCategory);
         rServing = view.findViewById(R.id.editServing);
@@ -73,57 +67,19 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
         rIngredients = view.findViewById(R.id.editIngredients);
         rInstrucitons = view.findViewById(R.id.editInstructions);
         rImage = view.findViewById(R.id.editImage);
-        editButton = view.findViewById(R.id.editButton);
         saveButton = view.findViewById(R.id.saveButton);
-        recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
 
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
-        Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
-        rTitle.setText(r.getRecipeTitle());
-        rCategory.setPrompt(r.getCategory());
-        rServing.setText(r.getServing());
-        rPrepTime.setText(r.getPrepTime());
-        rCookingTime.setText(r.getCookingTime());
-        rIngredients.setText(r.getIngredients());
-        rInstrucitons.setText(r.getInstructions());
-
-        try {
-            String fileName = r.getImagePath();
-            FileInputStream imageInput = getContext().openFileInput(fileName);
-            imageInput.close();
-            rImage.setImageBitmap(BitmapFactory.decodeStream(getContext().openFileInput
-                    (fileName)));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e){
-            e.printStackTrace();
-        }
-
-        recipeImagePath = r.getImagePath();
-
-        editButton.setOnClickListener(new View.OnClickListener() {
+        rImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage(v);
-                //delete old file from the system
-                try {
-                    getContext().deleteFile(r.getImagePath());
-                } catch (NullPointerException e){
-                    e.printStackTrace();
-                }
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
+
+        saveButton.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
                 String title = rTitle.getText().toString();
@@ -134,6 +90,7 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
                 String ingredient = rIngredients.getText().toString();
                 String instruction = rInstrucitons.getText().toString() ;
 
+                Recipe r = new Recipe();
                 r.setRecipeTitle(title);
                 r.setCategory(category);
                 r.setServing(serving);
@@ -143,15 +100,17 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
                 r.setInstructions(instruction);
                 r.setImagePath(recipeImagePath);
 
-                recipeViewModel.updateRecipe(r);
-                Toast.makeText(getActivity(), "Recipe edited successfully", Toast.LENGTH_LONG)
-                        .show();
+                //add recipe to db
+                recipeViewModel.insertRecipe(r);
+                Toast.makeText(getActivity(), "Recipe added successfully", Toast.LENGTH_LONG).show();
 
-                //getting back to detailfragment
-                getFragmentManager().popBackStackImmediate();
+                MainActivity.fragmentManager.popBackStack();
+                MainActivity.fragmentManager.getPrimaryNavigationFragment();
             }
         });
+        return view;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -252,7 +211,7 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
 
         Bitmap bm=null;
         if (data != null) {
-            try {
+        try {
                 ContentResolver contentResolver =  getContext().getContentResolver();
                 bm = MediaStore.Images.Media.getBitmap(contentResolver, data.getData());
                 byte[] buffer = new byte[8 * 1024];
@@ -268,17 +227,8 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
                 e.printStackTrace();
             }
         }
-
         rImage.setImageBitmap(bm);
         this.recipeImagePath = fileName;
-    }
-
-    public static EditRecipeFragment forRecipe(int recipeId){
-        EditRecipeFragment fragment = new EditRecipeFragment();
-        Bundle args = new Bundle();
-        args.putInt(KEY_RECIPE_ID, recipeId);
-        fragment.setArguments(args);
-        return fragment;
     }
 
 }

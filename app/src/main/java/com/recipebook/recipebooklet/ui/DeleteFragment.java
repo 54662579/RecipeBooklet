@@ -1,22 +1,19 @@
-package com.recipebook.recipebook.ui;
+package com.recipebook.recipebooklet.ui;
 
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.recipebook.recipebook.MainActivity;
-import com.recipebook.recipebook.R;
-import com.recipebook.recipebook.db.Recipe;
-import com.recipebook.recipebook.db.RecipeRepository;
-import com.recipebook.recipebook.db.RecipeViewModel;
+import com.recipebook.recipebooklet.MainActivity;
+import com.recipebook.recipebooklet.R;
+import com.recipebook.recipebooklet.db.Recipe;
+import com.recipebook.recipebooklet.db.RecipeViewModel;
 
 
 public class DeleteFragment extends android.support.v4.app.Fragment {

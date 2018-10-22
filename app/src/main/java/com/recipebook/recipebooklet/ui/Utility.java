@@ -1,4 +1,4 @@
-package com.recipebook.recipebook.ui;
+package com.recipebook.recipebooklet.ui;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -11,9 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
-/**
- * Created by Shreya Kotak on 12/05/16.
- */
 public class Utility {
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 

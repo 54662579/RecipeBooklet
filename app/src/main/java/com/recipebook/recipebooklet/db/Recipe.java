@@ -1,14 +1,9 @@
-package com.recipebook.recipebook.db;
+package com.recipebook.recipebooklet.db;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.graphics.Bitmap;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 
 @Entity(tableName = "RECIPES")
 public class Recipe{
@@ -27,6 +22,18 @@ public class Recipe{
     private String imagePath;
 
     public Recipe() {
+    }
+
+    @Ignore
+    public Recipe(@NonNull String recipeTitle, String category, String serving, String prepTime, String cookingTime, String ingredients, String instructions, String imagePath) {
+        this.recipeTitle = recipeTitle;
+        this.category = category;
+        this.serving = serving;
+        this.prepTime = prepTime;
+        this.cookingTime = cookingTime;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.imagePath = imagePath;
     }
 
     public int getId() {
@@ -102,5 +109,23 @@ public class Recipe{
         this.imagePath = imagePath;
     }
 
-
+    public static Recipe[] dataSample(){
+        return new Recipe[]{
+                new Recipe("Entree Test1","Entree","2","00:40","00:30", "Testing only 1/2 Cup " +
+                        "Flour 200 ml " +
+                        "milk", "Testing only Mix all ingredients together Step 2: put in " +
+                        "oven over 180 " +
+                        "degree", "entree.jpeg"),
+                new Recipe("Entree Test2","Entree","2","00:40","00:30", "Testing only 1/2 Cup " +
+                        "Flour 200 ml " +
+                        "milk", "Testing only Mix all ingredients together Step 2: put in " +
+                        "oven over 180 " +
+                        "degree", "maincourse.jpeg"),
+                new Recipe("Entree Test3","Entree","2","00:40","00:30", "Testing only 1/2 Cup " +
+                        "Flour 200 ml " +
+                        "milk", "Testing only Mix all ingredients together Step 2: put in " +
+                        "oven over 180 " +
+                        "degree", "drink.jpeg")
+        };
+    }
 }

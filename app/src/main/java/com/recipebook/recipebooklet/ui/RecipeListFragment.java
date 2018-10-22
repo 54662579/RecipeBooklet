@@ -1,4 +1,4 @@
-package com.recipebook.recipebook.ui;
+package com.recipebook.recipebooklet.ui;
 
 
 import android.arch.lifecycle.Lifecycle;
@@ -8,16 +8,17 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.recipebook.recipebook.MainActivity;
-import com.recipebook.recipebook.R;
-import com.recipebook.recipebook.databinding.ItemRecyclerViewBinding;
-import com.recipebook.recipebook.db.Recipe;
-import com.recipebook.recipebook.db.RecipeViewModel;
+import com.recipebook.recipebooklet.MainActivity;
+import com.recipebook.recipebooklet.R;
+import com.recipebook.recipebooklet.databinding.ItemRecyclerViewBinding;
+import com.recipebook.recipebooklet.db.Recipe;
+import com.recipebook.recipebooklet.db.RecipeViewModel;
 
 import java.util.List;
 
@@ -64,8 +65,7 @@ public class RecipeListFragment extends android.support.v4.app.Fragment {
                 if (recipeList != null) {
                     rAdapter.setRecipeList(recipeList);
                 } else {
-                    Toast.makeText(getActivity(), "No recipe, add new", Toast.LENGTH_LONG)
-                        .show();
+
                     }
             }
         });

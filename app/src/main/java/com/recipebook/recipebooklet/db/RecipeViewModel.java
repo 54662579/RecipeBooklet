@@ -1,4 +1,4 @@
-package com.recipebook.recipebook.db;
+package com.recipebook.recipebooklet.db;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -33,6 +33,8 @@ public class RecipeViewModel extends AndroidViewModel {
     public void insertRecipe(Recipe recipe){
         recipeRepository.insertRecipe(recipe);
     }
+
+    public void insertAll(Recipe... recipes){recipeRepository.insertAll(recipes);}
 
     public void updateRecipe(Recipe recipe){ recipeRepository.updateRecipe(recipe);}
 

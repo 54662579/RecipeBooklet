@@ -1,4 +1,4 @@
-package com.recipebook.recipebook;
+package com.recipebook.recipebooklet;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.recipebook.recipebook.db;
+package com.recipebook.recipebooklet.db;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -23,6 +23,7 @@ public class RecipeRepository {
     public void insertRecipe (Recipe recipe) {
         new insertAsyncTask(rRecipeDAO).execute(recipe);
     }
+    public void insertAll(Recipe... recipes){rRecipeDAO.insertAll(recipes);}
 
     public void deleteRecipe (Recipe recipe){
         rRecipeDAO.deleteRecipe(recipe);

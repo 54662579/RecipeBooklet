@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recipe Book</string>
+    <string name="app_name">Recipe Booklet</string>
     <string name="title_activity_add_recipe">Add New Recipe</string>
     <string name="recipename">Enter Recipe Title</string>
     <string name="servingsize">Enter Serving Size</string>

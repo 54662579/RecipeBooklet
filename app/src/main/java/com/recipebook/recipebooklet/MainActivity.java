@@ -1,12 +1,12 @@
-package com.recipebook.recipebook;
+package com.recipebook.recipebooklet;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.recipebook.recipebook.db.Recipe;
-import com.recipebook.recipebook.ui.HomeFragment;
-import com.recipebook.recipebook.ui.RecipeDetailFragment;
+import com.recipebook.recipebooklet.db.Recipe;
+import com.recipebook.recipebooklet.ui.HomeFragment;
+import com.recipebook.recipebooklet.ui.RecipeDetailFragment;
 
 public class MainActivity extends AppCompatActivity {
 

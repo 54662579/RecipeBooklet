@@ -1,4 +1,4 @@
-package com.recipebook.recipebook.db;
+package com.recipebook.recipebooklet.db;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -7,8 +7,6 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.recipebook.recipebook.db.Recipe;
-
 import java.util.List;
 
 @Dao
@@ -16,6 +14,8 @@ public interface RecipeDAO {
 
     @Insert
     void insertRecipe(Recipe recipe);
+    @Insert
+    void insertAll(Recipe...recipes);
 
     @Query("DELETE from RECIPES")
     void deleteAllRecipes();

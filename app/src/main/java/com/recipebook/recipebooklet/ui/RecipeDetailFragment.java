@@ -1,16 +1,12 @@
-package com.recipebook.recipebook.ui;
+package com.recipebook.recipebooklet.ui;
 
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,19 +14,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.recipebook.recipebook.MainActivity;
-import com.recipebook.recipebook.R;
-import com.recipebook.recipebook.databinding.FragmentRecipeDetailBinding;
-import com.recipebook.recipebook.db.Recipe;
-import com.recipebook.recipebook.db.RecipeRepository;
-import com.recipebook.recipebook.db.RecipeViewModel;
+import com.recipebook.recipebooklet.MainActivity;
+import com.recipebook.recipebooklet.R;
+import com.recipebook.recipebooklet.db.Recipe;
+import com.recipebook.recipebooklet.db.RecipeViewModel;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -108,6 +98,8 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
         viewPrepTime.setText(r.getPrepTime());
         viewCookTime.setText(r.getCookingTime());
         viewIngredient.setText(r.getIngredients());
+        Log.d("Ingredient:", r.getIngredients());
+        Log.d("Instructions", r.getInstructions());
         viewInstruction.setText(r.getInstructions());
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

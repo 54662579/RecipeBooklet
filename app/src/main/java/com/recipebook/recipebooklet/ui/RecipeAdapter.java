@@ -1,27 +1,18 @@
-package com.recipebook.recipebook.ui;
+package com.recipebook.recipebooklet.ui;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.recipebook.recipebook.R;
-import com.recipebook.recipebook.databinding.FragmentRecipeListBinding;
-import com.recipebook.recipebook.db.Recipe;
-import com.recipebook.recipebook.db.RecipeViewModel;
-import com.squareup.picasso.Picasso;
+import com.recipebook.recipebooklet.R;
+import com.recipebook.recipebooklet.databinding.FragmentRecipeListBinding;
+import com.recipebook.recipebooklet.db.Recipe;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

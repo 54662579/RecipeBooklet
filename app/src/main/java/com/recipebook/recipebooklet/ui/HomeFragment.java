@@ -1,4 +1,4 @@
-package com.recipebook.recipebook.ui;
+package com.recipebook.recipebooklet.ui;
 
 
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.recipebook.recipebook.MainActivity;
-import com.recipebook.recipebook.R;
+import com.recipebook.recipebooklet.MainActivity;
+import com.recipebook.recipebooklet.R;
 
 /**
  * A simple {@link Fragment} subclass.
