@@ -115,7 +115,11 @@ public class EditRecipeFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 selectImage(v);
                 //delete old file from the system
-                getContext().deleteFile(r.getImagePath());
+                try {
+                    getContext().deleteFile(r.getImagePath());
+                } catch (NullPointerException e){
+                    e.printStackTrace();
+                }
             }
         });
 

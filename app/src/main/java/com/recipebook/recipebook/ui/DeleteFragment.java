@@ -70,7 +70,11 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
              //   repository.deleteRecipe(deleteRecipe);
 
                 //delete file from the system.
-                getContext().deleteFile(deleteRecipe.getImagePath());
+                try {
+                    getContext().deleteFile(deleteRecipe.getImagePath());
+                } catch (NullPointerException e){
+                    e.printStackTrace();
+                }
 
                 //go back to the list
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
