@@ -46,8 +46,6 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
         super.onActivityCreated(savedInstanceState);
         recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
         Recipe deleteRecipe = recipeViewModel.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
-       // RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
-      //  Recipe deleteRecipe = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
 
         if (deleteRecipe == null){
             MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new
@@ -64,7 +62,6 @@ public class DeleteFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 //delete recipe
                 recipeViewModel.deleteRecipe(deleteRecipe);
-             //   repository.deleteRecipe(deleteRecipe);
 
                 //delete file from the system.
                 try {

@@ -74,8 +74,6 @@ public class RecipeDetailFragment extends android.support.v4.app.Fragment {
 
         recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
         Recipe r = recipeViewModel.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
-      //  RecipeRepository repository = new RecipeRepository(getActivity().getApplication());
-     //   Recipe r = repository.getRecipeById(getArguments().getInt(KEY_RECIPE_ID));
 
         try {
             String fileName = r.getImagePath();
